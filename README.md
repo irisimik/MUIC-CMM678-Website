@@ -1,6 +1,6 @@
 # MUIC Class Committee 678 Website
 
-A mobile-first website with the main goal of event coordination.
+A mobile-first website with the main goal of coordinating CMM678 events with freshmen and seniors.
 
 Home page:
 
