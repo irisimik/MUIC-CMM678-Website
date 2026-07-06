@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>☆ CMM 678 ┃ Under Construction</title>
+  
+  <link rel="icon" href="logo.png">
+  
+  <link rel="stylesheet" href="disablescrollglobal.css">
+  <link rel="stylesheet" href="background.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600&family=Chewy&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+  
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primaryGreen: '#79976c',
+            primaryGreenHover: '#7ea170',
+            badgeGreen: 'rgba(121, 151, 108, 0.73)',
+            stampBtn: '#5a6244',
+            stampBtnHover: 'rgba(90, 98, 68, 0.44)',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Arial', 'sans-serif'],
+            dancing: ['Dancing Script', 'cursive'],
+            playfair: ['Playfair Display', 'serif'],
+            chewy: ['Chewy', 'system-ui'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    @keyframes bloom {
+      0%, 100% { transform: scale(1); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+    .bloom-animation {
+      animation: bloom 3s ease-in-out infinite;
+    }
+  </style>
+</head>
+
+<body class="bg-cover bg-center min-h-[100dvh] flex flex-col select-none"> 
+
+  <main class="relative flex-1 flex flex-col justify-center items-center text-center overflow-hidden">
+    <div class="relative z-10 px-4">
+      <h1 class="font-dancing text-6xl md:text-8xl lg:text-9xl font-extrabold text-white mb-4">
+        Under Construction
+      </h1>
+      
+      <div class="relative pb-8 mb-10">
+        <p class="text-white text-base md:text-xl max-w-xl mx-auto leading-relaxed font-light italic">
+          Working on it...
+        </p>
+        <div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[30vw] border-b border-dashed border-white/50"></div>
+      </div>
+      
+      <div class="flex flex-col items-center gap-6">
+        <div class="bloom-animation">
+            <img src="logo.png" alt="Loading" class="w-16 h-16 opacity-80">
+        </div>
+        
+        <button onclick="window.history.back()" class="bg-stampBtn border-2 border-white text-white px-10 py-3 rounded-2xl uppercase font-bold tracking-widest transition-all hover:bg-stampBtnHover hover:backdrop-blur-md active:scale-95 shadow-lg">
+          Return Home
+        </button>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

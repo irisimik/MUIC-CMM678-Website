@@ -1,0 +1,6 @@
+body {
+  background-color: transparent;
+  background: url('bg2.jpg') no-repeat center center/cover;
+  backdrop-filter: blur(1px);
+  -webkit-backdrop-filter: blur(1px);
+}

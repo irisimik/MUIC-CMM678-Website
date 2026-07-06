@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>☆ CMM 678 ┃ Activity Board</title>
+  <link rel="icon" href="logo.png">
+  <link rel="stylesheet" href="disablescrollglobal.css">
+  <link rel="stylesheet" href="background.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600&family=Chewy&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  <script src="/scripts/getAsset.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primaryGreen: '#79976c',
+            badgeGreen: 'rgba(121, 151, 108, 0.73)',
+          },
+          fontFamily: {
+            sans: ['Inter', 'Arial', 'sans-serif'],
+            dancing: ['Dancing Script', 'cursive'],
+            playfair: ['Playfair Display', 'serif'],
+          },
+        }
+      }
+    }
+  </script>
+
+  <style>
+    .glass-scrollbar::-webkit-scrollbar { width: 6px; }
+    .glass-scrollbar::-webkit-scrollbar-track { background: rgba(255, 255, 255, 0.1); border-radius: 10px; }
+    .glass-scrollbar::-webkit-scrollbar-thumb { background: rgba(0, 0, 0, 0.1); border-radius: 10px; }
+    .glass-scrollbar::-webkit-scrollbar-thumb:hover { background: rgba(0, 0, 0, 0.2); }
+  </style>
+</head>
+
+<body class="min-h-[100dvh] flex items-center justify-center p-4 md:p-6 bg-cover bg-center">
+
+  <div class="relative w-full max-w-4xl h-[85vh] flex flex-col bg-white/40 backdrop-blur-md border border-white/30 rounded-[2.5rem] shadow-2xl overflow-hidden">
+    
+    <div class="px-8 py-6 border-b border-white/20 bg-white/30 backdrop-blur-lg z-10">
+      <h2 class="font-dancing text-4xl text-neutral-800 drop-shadow-sm">Activity Board</h2>
+      <p class="text-neutral-600 text-xs tracking-widest uppercase font-semibold">Our Activities</p>
+    </div>
+
+    <div class="flex-1 overflow-y-auto p-5 md:p-10 glass-scrollbar">
+      <div id="activity-grid" class="grid grid-cols-1 gap-6">
+        </div>
+    </div>
+
+    <div class="px-8 py-4 bg-white/20 border-t border-white/10 text-center">
+      <button onclick="window.location.href='/'" class="text-neutral-500 hover:text-neutral-800 text-xs font-bold tracking-widest transition-colors uppercase">
+        ← Back to Home
+      </button>
+    </div>
+  </div>
+
+  <script src="board.js"></script>
+</body>
+</html>

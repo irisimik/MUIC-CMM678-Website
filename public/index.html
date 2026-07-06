@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>☆ CMM 678 ┃ Home</title>
+	
+	<link rel="icon" href="logo.png">
+	
+	<link rel="stylesheet" href="disablescrollglobal.css">
+	<link rel="stylesheet" href="background.css">
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600&family=Chewy&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+	
+	<script src="https://cdn.jsdelivr.net/npm/@simondmc/popup-js@1.4.3/popup.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		tailwind.config = {
+			theme: {
+				extend: {
+					colors: {
+						primaryGreen: '#79976c',
+						primaryGreenHover: '#7ea170',
+						badgeGreen: 'rgba(121, 151, 108, 0.73)',
+						stampBtn: '#5a6244',
+						stampBtnHover: 'rgba(90, 98, 68, 0.44)',
+					},
+					fontFamily: {
+						sans: ['Inter', 'Arial', 'sans-serif'],
+						dancing: ['Dancing Script', 'cursive'],
+						playfair: ['Playfair Display', 'serif'],
+						chewy: ['Chewy', 'system-ui'],
+					},
+				}
+			}
+		}
+	</script>
+
+	<style>
+		.nav-link-hover {
+			position: relative;
+			display: inline-block;
+		}
+
+		.nav-link-hover::before, 
+		.nav-link-hover::after {
+			content: '';
+			position: absolute;
+			width: 100%;
+			height: 2px;
+			left: 0;
+			transform: scaleX(0);
+			transition: transform 300ms cubic-bezier(0, 0, 0.2, 1);
+			transform-origin: left;
+			background: linear-gradient(to right, #addd8d, #f8d286);
+		}
+
+		.nav-link-hover::before { 
+			top: -0.25rem;
+			transform-origin: right; 
+		}
+
+		.nav-link-hover::after { 
+			bottom: -0.25rem;
+		}
+
+		.nav-link-hover:hover::before, 
+		.nav-link-hover:hover::after { 
+			transform: scaleX(1); 
+		}
+	</style>
+</head>
+<body class="bg-cover bg-center min-h-[100dvh] flex flex-col select-none"> 
+	<header class="fixed top-0 left-0 w-full z-50 p-4 lg:px-[5%]">
+		<nav class="mx-auto flex flex-col lg:flex-row items-center justify-between w-full max-w-[1200px] lg:w-[max(50vw,800px)] bg-white/40 backdrop-blur-md border border-white/20 px-4 py-2 rounded-2xl lg:rounded-full transition-all duration-300 hover:bg-white/60 hover:border-white">
+			
+			<div class="flex items-center">
+				<img id="logoimg" src="logo.png" alt="Chamomile Logo" class="w-12 h-auto hover:rotate-12 transition-transform">
+			</div>
+
+			<ul class="flex flex-wrap justify-center gap-4 lg:gap-6 my-4 lg:my-0">
+				<li><a href="/board" class="nav-link-hover text-neutral-800 font-semibold text-sm tracking-wide">EVENTS</a></li>
+				<li><a href="member" class="nav-link-hover text-neutral-800 font-semibold text-sm tracking-wide">MEMBERS</a></li>
+				<li><a id="account_button" class="nav-link-hover text-neutral-800 font-semibold text-sm tracking-wide cursor-pointer">ACCOUNT</a></li>
+			</ul>
+
+			<a href="https://www.instagram.com/chamomile.cmm678/" target="_blank" rel="noopener noreferrer" class="bg-primaryGreen text-white px-6 py-2 rounded-full font-semibold text-sm border border-transparent transition-all hover:bg-primaryGreenHover hover:border-white/50">
+				CONTACT US
+			</a>
+		</nav>
+	</header>
+
+	<main class="relative flex-1 flex flex-col justify-center items-center text-center overflow-hidden">
+		<div class="relative z-10 px-4">
+			<div class="inline-block bg-badgeGreen backdrop-blur-md text-white px-4 py-1 rounded-2xl text-lg font-semibold mb-4">
+				CMM 678
+			</div>
+
+			<h1 class="font-dancing text-6xl md:text-8xl lg:text-9xl font-extrabold text-white drop-shadow-[0_2px_4px_rgba(0,0,0,0.7)] mb-4">
+				Chamomile
+			</h1>
+			
+			<div class="relative pb-6 mb-12">
+				<p class="text-white text-sm md:text-lg drop-shadow-md max-w-2xl mx-auto leading-relaxed">
+					Chamomile is a flower that symbolizes encouragement...<br>
+					Just like 678, who will always be there to support and uplift 688
+				</p>
+				<div class="absolute bottom-0 left-1/2 -translate-x-1/2 w-[40vw] border-b border-dashed border-white/70"></div>
+			</div>
+			
+			<div class="flex items-center justify-center gap-4 mt-8">
+				<button onclick="location.href='board'" class="bg-stampBtn border-2 border-white text-white px-8 py-2 rounded-2xl uppercase font-bold tracking-widest transition-all hover:bg-stampBtnHover hover:backdrop-blur-md active:scale-95">
+					ACTIVITY BOARD
+				</button>
+			</div>
+		</div>
+	</main>
+
+	<script src="index.js"></script>
+</body>
+</html>

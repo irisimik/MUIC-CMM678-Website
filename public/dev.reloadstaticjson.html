@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>Reload Static JSONs</title>
+</head>
+<body>
+	<h3>Reload Static JSONs Trigger</h3>
+
+	<button onclick="sendRequest()">Send POST Request</button>
+
+	<p id="status"></p>
+
+	<script>
+		async function sendRequest() {
+			const status = document.getElementById("status");
+			status.textContent = "Sending request...";
+
+			try {
+				const response = await fetch("/api/reloadstaticjsons", {
+					method: "POST",
+					headers: {
+						"Content-Type": "application/json"
+					}
+				});
+
+				if (response.ok) {
+					status.textContent = "Request sent successfully.";
+				} else {
+					status.textContent = "Request failed: " + response.status;
+				}
+			} catch (err) {
+				status.textContent = "Error: " + err.message;
+			}
+		}
+
+	</script>
+</body>
+</html>

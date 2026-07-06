@@ -1,0 +1,241 @@
+:root {
+  --primary-green: #79976c;
+  --text-dark: #333;
+  --text-light: #fff;
+}
+
+.title-font {
+  font-family: 'Playfair Display', serif;
+  font-weight: 500;
+}
+
+html,
+body {
+  height: 100dvh;
+  margin: 0;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 640px) {
+  body {
+    padding: 2rem;
+  }
+}
+
+.content-box {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 80rem;
+  height: 90dvh;
+  padding: 1.5rem;
+  border-radius: 0.75rem;
+  background-color: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+@media (min-width: 640px) {
+  .content-box {
+    padding: 3rem;
+  }
+}
+
+.page-header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+
+.page-header h1 {
+  font-size: 3rem;
+  color: #4a5568;
+}
+
+@media (min-width: 640px) {
+  .page-header h1 {
+    font-size: 3.75rem;
+  }
+}
+
+.scroll-container {
+  flex-grow: 1;
+  padding: 1rem 0;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: grid;
+  grid-auto-rows: min-content;
+  gap: 30px;
+}
+
+.scroll-container::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scroll-container::-webkit-scrollbar-thumb {
+  background-color: #bfa38b;
+  border-radius: 10px;
+}
+
+.dotted-line {
+  width: 90%;
+  height: 1px;
+  margin: 0 auto 0.5rem;
+  border-bottom: 1px solid #9ca3af;
+  opacity: 0.7;
+}
+
+.nong-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--text-light);
+  border-radius: 10px;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+              0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: auto;
+}
+
+.nong-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1),
+              0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.nong-main {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.nong-thumbnail {
+  width: 220px;
+  min-width: 220px;
+  background-size: cover;
+  background-position: center;
+  background-color: #ffffffbb;
+  border-radius: 10px;
+  transform: scale(1.01);
+  transition: transform 0.3s ease, background-size 0.2s ease;
+}
+
+.nong-thumbnail:hover {
+  transform: scale(1.5);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.nong-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.nong-name {
+  font-size: 4rem;
+  color: var(--text-dark);
+  margin-bottom: 0.5rem;
+  font-family: 'Playfair Display', serif;
+}
+
+.nong-description {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  line-height: 1.4;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1rem;
+  margin-bottom: .5rem;
+  overflow-wrap: break-word;
+}
+
+.nong-description svg,
+.nong-description i {
+  width: 1.2rem;
+  height: 1.2rem;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+.nong-name {
+  text-align: center;
+}
+
+.nong-description {
+  text-align: left;
+}
+
+.instagramhandle {
+  cursor: pointer;
+}
+
+.instagramhandle:hover {
+  text-decoration: underline;
+}
+
+.instagramhandle:active {
+  opacity: 0.7;
+}
+
+@media (max-width: 980px) {
+  html {
+    font-size: 12px;
+  }
+
+  .nong-card {
+    padding: 10px;
+  }
+
+  .nong-thumbnail {
+    width: auto;
+    min-width: 50px;
+    height: 200px;
+  }
+  .nong-name {
+    font-size: 2rem;
+  }
+  .nong-description {
+    font-size: 1rem;
+  }
+  .nong-thumbnail:hover {
+    transform: scale(1.15);
+  }
+
+  .nong-content {
+    display: contents;
+  }
+
+}
+
+@media (max-width: 700px) {
+  .nong-card {
+    display: flex;
+    justify-content: left;
+    align-items: left;
+  }
+  .nong-main {
+    display: contents;
+  }
+}

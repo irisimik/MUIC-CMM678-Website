@@ -1,0 +1,35 @@
+[
+  {
+    "category": "T3",
+    "title": "Rubnong",
+    "description": "Rubnong is a lively activity about building friendships. Where seniors welcome freshmen with fun activities, challenges, and team bonding.",
+    "badgeClass": "bg-badgeGreen/80 text-white",
+    "buttons": [
+      {
+        "label": "Check Your Rubnong Group",
+        "icon": "fa-circle-user",
+        "url": "https://cmm678.org/rubnong/group"
+      }
+    ]
+  },
+  {
+    "category": "T3",
+    "title": "OneFunDay",
+    "description": "OneFunDay is a one day activity, a fun extension of the Rubnong event. Where seniors and freshmen can have fun activities together.",
+    "badgeClass": "bg-badgeGreen/80 text-white",
+    "buttons": [
+      {
+        "label": "N'Group Registration",
+        "icon": "fa-pen-to-square",
+        "url": "https://docs.google.com/forms/d/e/1FAIpQLSeM4gF4Hb4P9xkjhscmnDH93PeOHhjFIJLdMkdAvmedRjwFQA/viewform"
+      }
+    ]
+  },
+  {
+    "category": "T3",
+    "title": "Secret Hug",
+    "description": "Secret Hug pairs seniors with freshmen to guide and support them through university life, helping them feel more comfortable and connected.",
+    "badgeClass": "bg-badgeGreen/80 text-white",
+    "buttons": []
+  }
+]

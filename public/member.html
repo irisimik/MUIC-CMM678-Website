@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="logo.png">
+  <link rel="stylesheet" href="disablescrollglobal.css">
+  <title>&#9734; CMM 678 &#10073; Meet Our Members</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="homebut.css">
+  <link rel="stylesheet" href="disablescrollglobal.css">
+  <link rel="stylesheet" href="background.css">
+  <link rel="stylesheet" href="member.css">
+  
+</head>
+
+<body>
+  <a href="./" class="home-button">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 12l22 22h-6v18h-12v-12h-8v12h-12v-18h-6z" />
+    </svg>
+  </a>
+
+  <div class="content-box">
+    <header class="page-header">
+      <h1 class="title-font">
+        Meet our teams
+      </h1>
+    </header>
+
+    <div class="header-row grid-layout">
+      <div class="col-1"></div>
+      <div class="col-5 md-col-4">Name</div>
+      <div class="col-4 md-col-4"></div>
+      <div class="col-3">Role</div>
+    </div>
+
+    <div class="scroll-container">
+      <script>
+        const members = [{
+            name: "Thanakrit Sae-ia",
+            role: "PRESIDENT",
+            imname: "members/Dragon.png"
+          },
+          {
+            name: "Phurich Niyomrat",
+            role: "VICE-PRESIDENT",
+            imname: "members/Billy.png"
+          },
+          {
+            name: "Varut Wissanuwatnakit ",
+            role: "TREASURER",
+            imname: "members/Alex.png"
+          },
+          {
+            name: "Kittaphon Suknet",
+            role: "SECRETARY",
+            imname: "members/Yok.png"
+          },
+
+          {
+            name: "Jantamanee Plueangklang",
+            role: "PROJECT MANAGER",
+            imname: "members/Mon.png"
+          },
+          {
+            name: "Pornchanok Kengka",
+            role: "PROJECT MANAGER",
+            imname: "members/Year.png"
+          },
+          {
+            name: "Anissa Kuruwatcharapong ",
+            role: "PROJECT MANAGER",
+            imname: "members/Kaimook.png"
+          },
+          {
+            name: "Amy Daim",
+            role: "PROJECT MANAGER",
+            imname: "members/Amy.png"
+          },
+          {
+            name: "Monruedee Srikul",
+            role: "PROJECT MANAGER",
+            imname: "members/Bua.png"
+          },
+          {
+            name: "Natcha Tharakulwattana",
+            role: "PROJECT MANAGER",
+            imname: "members/Lee.png"
+          },
+          {
+            name: "Boonyaporn  Rattanaraksa ",
+            role: "PROJECT MANAGER",
+            imname: "members/Nan.png"
+          },
+          {
+            name: "Tawanok Sirichote",
+            role: "PROJECT MANAGER",
+            imname: "members/Mai.png"
+          },
+          {
+            name: "Parichad Boonaom",
+            role: "PROJECT MANAGER",
+            imname: "members/Pearwa.png"
+          },
+          {
+            name: "Thanawan Yingyongsomsawad ",
+            role: "PROJECT MANAGER",
+            imname: "members/Ming.png"
+          },
+
+          {
+            name: "Prowphitcha  Leelapojsan ",
+            role: "PUBLIC RELATIONS",
+            imname: "members/Dada.png"
+          },
+          {
+            name: "Poonyapat Kulthai",
+            role: "PUBLIC RELATIONS",
+            imname: "members/Poon.png"
+          },
+          {
+            name: "Kullanant Kittironakorn ",
+            role: "PUBLIC RELATIONS",
+            imname: "members/Hong.png"
+          },
+          {
+            name: "Pichanok Vilawan",
+            role: "PUBLIC RELATIONS",
+            imname: "members/Chofah.png"
+          },
+          {
+            name: "Siri Ngamsiripol",
+            role: "PUBLIC RELATIONS",
+            imname: "members/Kim.png"
+          },
+          {
+            name: "Ramida Punpukdee",
+            role: "PUBLIC RELATIONS",
+            imname: "members/Tamtam.png"
+          },
+          {
+            name: "Korawan Apiraktanakon",
+            role: "PUBLIC RELATIONS",
+            imname: "members/Syd.png"
+          },
+
+        ];
+        const cmap = {
+          ["PROJECT MANAGER"]: "#48aa2f",
+          ["PUBLIC RELATIONS"]: "#896dbf",
+          ["SECRETARY"]: "#ffbd59",
+          ["TREASURER"]: "#ffbd59",
+          ["VICE-PRESIDENT"]: "#ffbd59",
+          ["PRESIDENT"]: "#ffed00"
+        }
+
+        const container = document.querySelector('.scroll-container');
+
+        members.forEach((member, index) => {
+          const itemHtml = `
+                        <div class="member-item grid-layout">
+                            <!-- Image Column -->
+                            <div class="col-1" style="display: flex; justify-content: center;">
+                                <img 
+                                    src="${member.imname}" 
+                                    class="member-headshot" 
+                                    alt="${member.name}" 
+                                    style="
+                                        width: 75px; 
+                                        height: 75px; 
+                                        object-fit: cover; 
+                                        object-position: center; 
+                                        background: radial-gradient(circle, ${cmap[member.role]} 0%, rgba(0,0,0,0) 80%);
+                                    "
+                                >
+                            </div>
+                            
+                            <!-- Name Column -->
+                            <div class="col-5 md-col-4 member-name">${member.name}</div>
+                            <div class="col-4 md-col-4"></div>
+                            
+                            <!-- Role Column -->
+                            <div class="col-3 member-role">${member.role}</div>  
+                        </div>
+                    `;
+          container.innerHTML += itemHtml;
+        });
+      </script>
+
+    </div>
+  </div>
+
+</body>
+
+</html>

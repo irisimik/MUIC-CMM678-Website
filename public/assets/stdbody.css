@@ -1,0 +1,27 @@
+
+html,
+body {
+	height: 100dvh;
+	margin: 0;
+	overflow: hidden;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	font-family: Arial, sans-serif;
+	user-select: none;
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+}
+
+body {
+	font-family: 'Inter', sans-serif;
+	height: 100dvh;
+	padding: 1rem;
+	align-items: center;
+	display: flex;
+	justify-content: center;
+}

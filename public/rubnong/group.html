@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="icon" href="/logo.png">
+	<title>&#9734; CMM 678 &#10073; Rubnong Group</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+	<link rel="stylesheet" href="./group.css">
+	<link rel="stylesheet" href="./modal.css">
+	
+	<link rel="stylesheet" href="/disablescrollglobal.css">
+	<link rel="stylesheet" href="/background.css">
+	
+	<script src="/scripts/getAsset.js"></script>
+	<script>
+		get("/rubnong/assets/cmhappy.png");
+	</script>
+	
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@100..900&display=swap" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+
+	<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+</head>
+
+<body>
+	<a href="/" class="home-button">
+		<svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+			<path d="M32 12l22 22h-6v18h-12v-12h-8v12h-12v-18h-6z" />
+		</svg>
+	</a>
+	<div id="blackout"></div>
+	<div id="walker" class="animoff"></div>
+	<div id="crackOverlay"></div>
+	<div id="flashOverlay"></div>
+	<div id="ticket" class="ticket"></div>
+	<div id="shining"></div>
+	
+	<div id="idPrompt" class="modal">
+		<div class="modal-content">
+			<p style="font-size: 2.5rem">Enter your Student ID:</p><br>
+			<input type="text" id="studentIdInput" placeholder="Student ID">
+			<button id="submitId">Submit</button>
+		</div>
+	</div>
+</body>
+<script src="group.js"></script>
+</html>

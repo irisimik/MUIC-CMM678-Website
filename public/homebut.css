@@ -1,0 +1,94 @@
+.home-button {
+  position: absolute;
+  top: 8px;
+  right: 5px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  z-index: 1000000;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+	background: rgba(255, 255, 255, 0.75); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s, transform 0.3s;
+}
+
+.home-button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  transform: scale(1.1);
+}
+
+.home-button svg {
+  width: 24px;
+  height: 24px;
+  fill: rgb(0, 0, 0);
+}
+
+@media (max-width: 768px) {
+  .home-button {
+    width: 48px;
+    height: 48px;
+  }
+}
+
+.page-title {
+  position: fixed;
+  top: 8px;
+  left: 5px;
+  z-index: 1000000;
+  padding: 10px 20px;
+  border-radius: 999px;
+
+  border: 1px solid rgba(255, 255, 255, 0.3); 
+	background: rgba(255, 255, 255, 0.75); 
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgb(0, 0, 0);
+  font-size: 18px;
+  font-weight: 700;
+  font-family: sans-serif;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+  animation: titleintro 1.4s
+    cubic-bezier(0.22, 1, 0.36, 1)
+    forwards;
+}
+
+@keyframes titleintro {
+  0% {
+    left: 50%;
+    transform: translate(-50%, 50%) scale(2);
+    opacity: 0;
+  }
+
+  40% {
+    opacity: 1;
+		left: 50%;
+    transform: translate(-50%, 50%) scale(2);
+  }
+
+  100% {
+    top: 8px;
+    left: 5px;
+    transform: translate(0, 0) scale(1);
+    opacity: 1;
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 15px;
+    padding: 12px 20px;
+  }
+}

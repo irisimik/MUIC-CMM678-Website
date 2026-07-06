@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CMM Gift Dashboard</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="/scripts/getAsset.js"></script>
+
+	<link rel="stylesheet" href="/scripts/logincomp.css">
+	<script>
+		get("/assets/loading.jpg")
+	</script>
+  <link rel="stylesheet" href="/disablescrollglobal.css">
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+  
+  <style>
+    body {
+      background-color: #000;
+      display: flex;
+      flex-direction: row; 
+      height: 100dvh;
+      margin: 0;
+      padding: 20px;
+      box-sizing: border-box;
+      overflow: hidden;
+      font-family: sans-serif;
+      color: white;
+      gap: 20px;
+    }
+
+    .grid-section {
+      display: flex;
+      justify-content: flex-start;
+      align-items: flex-start;
+      width: 70vw;
+      height: 40dvh;
+    }
+
+    .grid-container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+      gap: 1.5vmin;
+      width: 100%;
+      height: 100%;
+    }
+
+    .square {
+      background-color: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      aspect-ratio: 1 / 1;
+      width: 100%;
+      max-height: 100%; 
+      box-sizing: border-box;
+      transition: transform 0.3s ease-in-out;
+      user-select: none;
+      cursor: pointer;
+    }
+    .square:active {
+      transform: scale(1.05);
+      background-color: rgba(255, 255, 255, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.5);
+    }
+    .square.selected {
+      background-color: rgba(255, 255, 255, 0.4);
+      border: 2px solid #ffffff;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+    }
+
+    .label { font-size: 5vmin; font-weight: bold; }
+    .number { font-size: 2vmin; opacity: 0.8; margin-top: 2%; }
+
+    .list-section {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      height: 100%; 
+      min-width: 300px;
+      box-sizing: border-box;
+    }
+
+    .list-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      letter-spacing: 2px;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+    }
+
+    .add-btn {
+      background: #fff;
+      color: #000;
+      border: none;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+
+    .scrollable-list {
+      flex: 1;
+      overflow-y: auto;
+    }
+
+    .list-item {
+      background: rgba(255, 255, 255, 0.1);
+      margin-bottom: 10px;
+      padding: 12px 15px;
+      border-radius: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .item-text { font-size: 1.1rem; }
+    .item-actions { display: flex; gap: 15px; }
+    .icon-btn { background: none; border: none; color: white; cursor: pointer; opacity: 0.6; transition: 0.2s; }
+
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.8);
+      display: none; 
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    #imageModal .modal-content {
+      max-width: 500px;
+      width: 90%;
+      max-height: 90dvh;
+      display: flex;
+      flex-direction: column;
+      padding: 20px;
+      box-sizing: border-box;
+    }
+
+    #previewImg {
+      width: 100%;
+      height: auto;
+      
+      max-height: calc(90dvh - 250px); 
+      object-fit: contain;
+      border-radius: 8px;
+      background-color: #000;
+      flex-shrink: 1;
+      margin-bottom: 15px;
+    }
+    #imageModal .info-container {
+      flex-shrink: 0;
+    }
+
+    .modal-btn {
+      flex-shrink: 0;
+    }
+
+    .modal-content {
+      background: #1a1a1a;
+      padding: 25px;
+      border-radius: 15px;
+      width: 90%;
+      max-width: 400px;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .modal-content h3 {
+      margin-top: 0;
+      margin-bottom: 20px;
+      font-size: 1.2rem;
+      text-align: center;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      font-size: 0.8rem;
+      color: #aaa;
+    }
+
+    .form-group input {
+      width: 100%;
+      padding: 10px;
+      background: #333;
+      border: 1px solid #444;
+      border-radius: 5px;
+      color: white;
+      box-sizing: border-box;
+    }
+
+    .form-group input[type="file"] {
+      background: none;
+      border: none;
+      padding: 5px 0;
+    }
+
+    .modal-actions {
+      display: flex;
+      gap: 10px;
+      margin-top: 20px;
+    }
+
+    .modal-btn {
+      flex: 1;
+      padding: 12px;
+      border-radius: 5px;
+      border: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .btn-cancel { background: #444; color: white; }
+    .btn-submit { background: #fff; color: #000; }
+    
+
+    @media (max-width: 767px) {
+      body { flex-direction: column; padding: 10px; gap: 15px; }
+      .grid-section { width: 100%; height: auto; }
+      .grid-container { aspect-ratio: 4 / 2; }
+      .list-section { width: 100%; height: 50dvh; min-width: 0; }
+    }
+  </style>
+</head>
+<body>
+	<div id="supercool-login-root"></div>
+  <div class="modal-overlay" id="confirmDeleteModal">
+    <div class="modal-content">
+      <h3>Confirm Deletion</h3>
+      <p style="text-align:center; opacity:0.85; margin-bottom:20px;">
+        Are you sure you want to delete <b id="deleteTargetId">?</b>?
+      </p>
+      <div class="modal-actions">
+        <button class="modal-btn btn-cancel" id="cancelDeleteBtn">CANCEL</button>
+        <button class="modal-btn btn-submit" id="confirmDeleteBtn">DELETE</button>
+      </div>
+    </div>
+  </div>
+  <div class="grid-section">
+    <div class="grid-container">
+      <div class="square"><div class="label">A</div><div class="number">?</div></div>
+      <div class="square"><div class="label">B</div><div class="number">?</div></div>
+      <div class="square"><div class="label">C</div><div class="number">?</div></div>
+      <div class="square"><div class="label">D</div><div class="number">?</div></div>
+      <div class="square"><div class="label">E</div><div class="number">?</div></div>
+      <div class="square"><div class="label">F</div><div class="number">?</div></div>
+      <div class="square"><div class="label">G</div><div class="number">?</div></div>
+      <div class="square"><div class="label">H</div><div class="number">?</div></div>
+    </div>
+  </div>
+
+  <div class="list-section">
+    <div class="list-header">
+      <h2 class="section-title" id="listLabel">?</h2>
+      <button class="add-btn" id="openModal"><i class="fas fa-plus"></i> ADD</button>
+    </div>
+    <div class="scrollable-list" id="itemList">
+      <!--<div class="list-item">
+        <span class="item-text">A37</span>
+        <div class="item-actions">
+          <button class="icon-btn" title="VIEW"><i class="fas fa-eye"></i></button>
+          <button class="icon-btn" title="DELETE"><i class="fas fa-trash"></i></button>
+        </div>
+      </div>-->
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="imageModal">
+    <div class="modal-content" style="max-width: 500px; text-align: center;">
+      <h3 id="imageModalTitle">GIFT IMG</h3>
+      <img id="previewImg" src="" alt="Gift Image">
+      
+      <div class="info-container" style="padding-top: 1rem; margin-bottom: 20px; display: flex; flex-direction: column; gap: 10px; font-size: 0.9rem; border-top: 1px solid rgba(255,255,255,0.1);">
+        <div style="display: flex; justify-content: space-around;">
+          <div><span style="color: #aaa;">GIFTER:</span> <b id="displayGifter">?</b></div>
+          <div><span style="color: #aaa;">RECIPIENT:</span> <b id="displayRecipient">?</b></div>
+        </div>
+        <div style="text-align: left; padding: 10px; background: rgba(255,255,255,0.05); border-radius: 5px;">
+          <span style="color: #aaa; font-size: 0.8rem; display: block; margin-bottom: 4px;">NOTE:</span>
+          <div id="displayNote" style="word-wrap: break-word; line-height: 1.4;">?</div>
+        </div>
+      </div>
+
+      
+
+      <button class="modal-btn btn-cancel" id="closeImageModal">CLOSE</button>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-content">
+      <h3>Add New Entry</h3>
+      <div class="form-group">
+        <label>Gifter ID</label>
+        <input type="number" id="gifterId" placeholder="Enter number">
+      </div>
+      <div class="form-group">
+        <label>Recipient ID</label>
+        <input type="number" id="recipientId" placeholder="Enter number">
+      </div>
+      <div class="form-group">
+        <label>Note</label>
+        <input type="text" id="giftNote" placeholder="Enter a message">
+      </div>
+      <div class="form-group">
+        <label>Gift Image</label>
+        <input type="file" id="giftImg" accept="image/jpeg, image/png, image/webp">
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn btn-cancel" id="closeModal">CANCEL</button>
+        <button class="modal-btn btn-submit" id="submitBtn">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+	<script src="/scripts/logincomp.js"></script>
+  <script>
+    function confirmDeletion(id) {
+      console.log(id, "pending deletion")
+      return new Promise((resolve) => {
+        const modal = document.getElementById("confirmDeleteModal");
+        const confirmBtn = document.getElementById("confirmDeleteBtn");
+        const cancelBtn = document.getElementById("cancelDeleteBtn");
+        const label = document.getElementById("deleteTargetId");
+
+        label.textContent = id;
+        modal.style.display = "flex";
+
+        const cleanup = () => {
+          modal.style.display = "none";
+          confirmBtn.onclick = null;
+          cancelBtn.onclick = null;
+          window.onclick = null;
+        };
+
+        confirmBtn.onclick = () => {
+          cleanup();
+          resolve(true);
+        };
+
+        cancelBtn.onclick = () => {
+          cleanup();
+          resolve(false);
+        };
+
+        window.onclick = (e) => {
+          if (e.target === modal) {
+            cleanup();
+            resolve(false);
+          }
+        };
+      });
+    }
+  </script>
+  <script>
+		
+
+    var GLOBFETCHLOOP = true;
+    const listLabel = document.getElementById('listLabel');
+    const squares = document.querySelectorAll('.square');
+    const itemList = document.getElementById('itemList');
+		let email = null;
+		let stid = null;
+    let tableData = {};
+    document.querySelector('.square').click(); 
+    async function fetchData() {
+      try {
+
+        const response = await fetch("/ADMIN/gettableinfo", { method: "POST", body:JSON.stringify({email: email, id: stid}) }, );
+				const data = await response.json();
+        tableData = data;
+        updateGridNumbers();
+      } catch (err) {
+        console.error("Error fetching data:", err);
+      }
+      renderList(listLabel.textContent)
+    }
+    let pollid = null;
+
+    function startPoll(interval) {
+      stopPoll();
+      pollid = setInterval(fetchData, interval);
+    }
+    function stopPoll() {
+      if (pollid) {
+        clearInterval(pollid);
+        pollid = null;
+      }
+    }
+    
+    document.addEventListener("visibilitychange",()=>{
+      if (document.visibilityState === "visible") {
+        fetchData();
+        startPoll(2500);
+      } else {
+        stopPoll();
+      }
+    });
+    
+		async function init() {
+			if (email === null || id === null) {
+				let res = await openlogin();
+				email = res.email.split("@")[0];
+				stid = res.password;
+			}
+			fetchData();
+			startPoll(2500);
+		}
+    init();
+
+    function getdata(id) {
+      const entry = tableData.val.find(item => item[0] === id);
+      return entry ? entry : null;
+    }
+
+    function updateGridNumbers() {
+      squares.forEach(square => {
+        const letter = square.querySelector('.label').textContent;
+        const countDisplay = square.querySelector('.number');
+        
+        const count = tableData[letter] ? tableData[letter].length : 0;
+        countDisplay.textContent = count;
+      });
+    }
+
+    function renderList(letter) {
+      itemList.innerHTML = ''; 
+    
+      const items = tableData[letter] || [];
+    
+      if (items.length === 0) {
+        itemList.innerHTML = '<div class="list-item"><span class="item-text" style="opacity:0.5">Empty</span></div>';
+        return;
+      }
+
+      items.forEach(itemId => {
+        const div = document.createElement('div');
+        div.className = 'list-item';
+        div.innerHTML = `
+          <span class="item-text">${letter}${itemId}</span>
+          <div class="item-actions">
+            <button class="icon-btn" title="VIEW" onclick="viewItem('${letter}${itemId}')"><i class="fas fa-eye"></i></button>
+            <button class="icon-btn" title="DELETE" onclick="deleteItem('${letter}${itemId}')"><i class="fas fa-trash"></i></button>
+          </div>
+        `;
+        itemList.appendChild(div);
+      });
+    }
+
+    function viewItem(id) {
+      console.log(id)
+      const data = getdata(id);
+      const imageModal = document.getElementById('imageModal');
+      imageModal.src = "/assets/loading.jpg";
+      const previewImg = document.getElementById('previewImg');
+      const title = document.getElementById('imageModalTitle');
+      const displayGifter = document.getElementById('displayGifter');
+      const displayRecipient = document.getElementById('displayRecipient');
+      if (data) {
+        title.textContent = `GIFTIMG@${id}`;
+        previewImg.src = `/secrethug/giftimg/${data[1]}`;
+
+        displayGifter.textContent = data[2] || "N/A";
+        displayRecipient.textContent = data[3] || "N/A";
+        displayNote.textContent = data[4] || "N/A";
+
+        imageModal.style.display = 'flex';
+      } else {
+        Toastify({
+          text: `No gift found for id=${id}`,
+          escapeMarkup: false,
+          duration: 2500,
+          close: false,
+          gravity: "bottom",
+          position: "center",
+          backgroundColor: "#e53e3e",
+        }).showToast();
+      }
+    }
+
+    document.getElementById('closeImageModal').onclick = () => {
+      document.getElementById('imageModal').src = "/assets/loading.jpg"
+      document.getElementById('imageModal').style.display = 'none';
+    };
+
+    window.onclick = (event) => {
+      const addModal = document.getElementById('modalOverlay');
+      const imgModal = document.getElementById('imageModal');
+      if (event.target == addModal) addModal.style.display = 'none';
+      if (event.target == imgModal) imgModal.style.display = 'none';
+    };
+    async function deleteItem(id) {
+      const confirmed = await confirmDeletion(id);
+      if (!confirmed) return;
+      console.log("Deleting:", id);
+      let loadtoas = Toastify({
+        text: `Deleting...`,
+        escapeMarkup: false,
+        duration: -1,
+        close: false,
+        gravity: "bottom",
+        position: "center",
+        backgroundColor: "#6464649a",
+      });
+      loadtoas.showToast();
+      fetch("/ADMIN/deletegift",{method: 'POST', headers: {'Content-Type': 'application/json'}, body: JSON.stringify({giftid: id, email:email, id:stid})}).then((res)=>{
+        if (!res.ok) {
+          console.log(res.reason);
+        }
+        return res.json();
+      }).then((j) => {
+        loadtoas.hideToast();
+        if (j.success) {
+          fetchData();
+          startPoll(2500);
+          Toastify({
+            text: `Deleted ${id}`,
+            escapeMarkup: false,
+            duration: 2000,
+            close: false,
+            gravity: "bottom",
+            position: "center",
+            backgroundColor: "#00ff009a",
+          }).showToast();
+        }
+      })
+    }
+
+    squares.forEach(square => {
+      square.onclick = () => {
+        const letter = square.querySelector('.label').textContent;
+        
+        squares.forEach(s => s.classList.remove('selected'));
+        square.classList.add('selected');
+        listLabel.textContent = letter;
+
+        renderList(letter);
+      };
+    });
+
+    const modal = document.getElementById('modalOverlay');
+    const openBtn = document.getElementById('openModal');
+    const closeBtn = document.getElementById('closeModal');
+    const submitBtn = document.getElementById('submitBtn');
+
+    openBtn.onclick = () => {
+      modal.style.display = 'flex';
+    };
+
+    closeBtn.onclick = () => {
+      modal.style.display = 'none';
+    };
+
+    window.onclick = (event) => {
+      if (event.target == modal) {
+        modal.style.display = 'none';
+      }
+    };
+
+    function handleFiles(files) {
+      const file = files[0];
+      const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+
+      if (file && allowedTypes.includes(file.type)) {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+      } else {
+        Toastify({
+          text: "Please upload a valid JPG, PNG, or WEBP image.",
+          duration: 3000,
+          backgroundColor: "#e53e3e",
+        }).showToast();
+      }
+    }
+    async function compressImage(file, maxSizeMB = 5) {
+      const maxSize = maxSizeMB * 1024 * 1024;
+
+      const img = await createImageBitmap(file);
+
+      const canvas = document.createElement("canvas");
+      canvas.width = img.width;
+      canvas.height = img.height;
+
+      const ctx = canvas.getContext("2d");
+      ctx.drawImage(img, 0, 0);
+
+      let quality = 0.9;
+      let blob;
+
+      do {
+        blob = await new Promise(resolve =>
+          canvas.toBlob(resolve, "image/jpeg", quality)
+        );
+        quality -= 0.05;
+      } while (blob.size > maxSize && quality > 0.1);
+
+      return blob;
+    } 
+    async function uploadimg(files, gifterId, targetId, note) {
+      const file = files[0];
+      
+      if (!file) {
+        Toastify({ text: "Please select a file first", backgroundColor: "#e53e3e" }).showToast();
+        return;
+      }
+
+      const formData = new FormData();
+      const compressedBlob = await compressImage(file, 5);
+
+      formData.append('giftImage', compressedBlob);
+      formData.append('ovid', gifterId)
+      formData.append('targetId', targetId);
+      formData.append('note', note);
+      formData.append('prefbucket', listLabel.textContent); // bucket here
+      
+      document.cookie = `email=${email}; path=/ADMIN; samesite=lax`;
+			document.cookie = `id=${stid.toString()}; path=/ADMIN; samesite=lax`;
+
+      try {
+        const uploading = Toastify({
+          text: "Uploading...",
+          close: false,
+          backgroundColor: "#000000",
+          gravity: "bottom",
+          position: "center",
+        });
+        uploading.showToast();
+        const response = await fetch('/ADMIN/uploadgift', {
+          method: 'POST',
+          body: formData,
+        });
+        uploading.hideToast();
+        
+        if (response.ok) {
+          const json = (await response.json());
+          if (json.duplicated) {
+            Toastify({
+              text: "Duplicated recipient, this recipient already have an unclaimed gift",
+              backgroundColor: "#e53e3e",
+              close: false,
+              gravity: "bottom",
+              position: "center",
+            }).showToast();
+            return;
+          }
+          const id = json.giftid;
+          
+          Toastify({
+            text: `Gift registered as ${id}`,
+            backgroundColor: "#00ff009e",
+            close: false,
+            gravity: "bottom",
+            position: "center",
+          }).showToast();
+          fetchData();
+
+        } else {
+          throw new Error('Upload failed');
+        }
+      } catch (error) {
+        console.error("Error:", error);
+        Toastify({
+          text: "Error uploading image. Please try again.",
+          backgroundColor: "#e53e3e",
+          close: false,
+          gravity: "bottom",
+          position: "center",
+        }).showToast();
+      }
+    }
+    
+    submitBtn.onclick = () => {
+      const gifter = document.getElementById('gifterId').value;
+      const recipient = document.getElementById('recipientId').value;
+      const imgid = document.getElementById('giftImg').value;
+      const imgfiles = document.getElementById('giftImg').files;
+      const note = document.getElementById('giftNote').value;
+      if (listLabel.textContent === '?') {
+        Toastify({
+          text: `Select a section first`,
+          escapeMarkup: false,
+          duration: 2500,
+          close: false,
+          gravity: "bottom",
+          position: "center",
+          backgroundColor: "#e53e3e",
+        }).showToast();
+        return;
+      }
+      
+      if(gifter && recipient && imgid) {
+        handleFiles(imgfiles);
+        uploadimg(imgfiles, gifter, recipient, note);
+        modal.style.display = 'none';
+
+        document.getElementById('gifterId').value = '';
+        document.getElementById('recipientId').value = '';
+        document.getElementById('giftImg').value = '';
+        document.getElementById('giftNote').value = ''
+      } else {
+        Toastify({
+          text: `Enter gift data.`,
+          escapeMarkup: false,
+          duration: 2500,
+          close: false,
+          gravity: "bottom",
+          position: "center",
+          backgroundColor: "#e53e3e",
+        }).showToast();
+      }
+    };
+  </script>
+</body>
+	
+</html>

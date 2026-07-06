@@ -1,0 +1,2 @@
+studentID email major
+6786969 dum.mmy@student.mahidol.edu Computer Engineering

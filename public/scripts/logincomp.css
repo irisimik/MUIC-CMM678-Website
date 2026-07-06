@@ -1,0 +1,164 @@
+
+#supercool-login-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.84);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  z-index: 999999;
+
+  opacity: 0;
+  pointer-events: none;
+
+  transition: opacity 0.25s ease;
+}
+
+#supercool-login-backdrop.supercool-login-active {
+  opacity: 1;
+  pointer-events: all;
+}
+
+#supercool-login-wrapper {
+  position: relative;
+}
+
+#supercool-login-modal {
+  width: 340px;
+
+  background: #050505;
+
+  border: 1px solid #1a1a1a;
+  border-radius: 24px;
+
+  padding: 28px;
+
+  color: white;
+
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.03),
+    0 24px 80px rgba(0,0,0,0.95);
+
+  transform: translateY(-40px) scale(0.96);
+  opacity: 0;
+
+  transition:
+    transform 0.28s ease,
+    opacity 0.28s ease;
+}
+
+#supercool-login-backdrop.supercool-login-active #supercool-login-modal {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+#supercool-login-close {
+  position: absolute;
+
+  top: 14px;
+  right: 16px;
+
+  background: transparent;
+  border: none;
+
+  color: #777;
+
+  font-size: 18px;
+
+  cursor: pointer;
+}
+
+#supercool-login-title {
+  font-size: 24px;
+  font-weight: 700;
+
+  margin-bottom: 6px;
+}
+
+#supercool-login-subtitle {
+  color: #8b8b8b;
+  font-size: 14px;
+
+  margin-bottom: 24px;
+}
+
+#supercool-login-form {
+  width: 100%;
+}
+
+.supercool-login-group {
+  margin-bottom: 16px;
+}
+
+#supercool-login-modal *,
+#supercool-login-modal *::before,
+#supercool-login-modal *::after {
+  box-sizing: border-box;
+}
+
+#supercool-login-email,
+#supercool-login-password {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  padding: 14px 16px;
+
+  border-radius: 14px;
+  border: 1px solid #1f1f1f;
+
+  background: #0b0b0b;
+  color: white;
+
+  outline: none;
+
+  font-size: 14px;
+
+  box-sizing: border-box;
+
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease;
+}
+
+#supercool-login-email:focus,
+#supercool-login-password:focus {
+  border-color: #444;
+  background: #111;
+}
+
+#supercool-login-email::placeholder,
+#supercool-login-password::placeholder {
+  color: #666;
+}
+
+#supercool-login-submit {
+  width: 100%;
+
+  padding: 14px;
+
+  border: none;
+  border-radius: 14px;
+
+  background: white;
+  color: black;
+
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    opacity 0.15s ease;
+}
+
+#supercool-login-submit:hover {
+  opacity: 0.92;
+}
+
+#supercool-login-submit:active {
+  transform: scale(0.98);
+}

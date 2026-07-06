@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" href="/logo.png">
+  <title>&#9734; CMM 678 &#10073; Gift Exchange</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+  <link rel="stylesheet" href="/homebut.css">
+  <link rel="stylesheet" href="/secrethug/giftexchange.css">
+  <link rel="stylesheet" href="/disablescrollglobal.css">
+  <link rel="stylesheet" href="/background.css">
+  <link rel="stylesheet" href="/secrethug/modal.css">
+	<script src="/scripts/getAsset.js"></script>
+
+	<script>get("/secrethug/giftimg/loading.gif")</script>
+
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+	<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@400;600&family=Chewy&family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Playwrite+NO:wght@100..400&display=swap" rel="stylesheet">
+
+
+  <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+ 
+</head>
+
+<body>
+	<div class="page-title" style='font-family: "Dancing Script", cursive; font-size: 1rem; color: var(--primary-green)'>
+  	Gift Exchange
+	</div>
+  <a href="/" class="home-button">
+    <svg viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+      <path d="M32 12l22 22h-6v18h-12v-12h-8v12h-12v-18h-6z" />
+    </svg>
+  </a>
+
+  <div id="nongPrompt" class="modal" style="display: none">
+    <div class="modal-content">
+      <p><strong>Who is this gift for?</strong></p>
+      <span class="dotted-line" style="padding-top: 1rem"></br></span>
+      <div class="recipient-cards" id="cardsContainer">
+      </div>
+    </div>
+  </div>
+
+  <div id="notePrompt" class="modal" style="display: none">
+    <div class="modal-content">
+      <p>Note to your N'Junior</p><br>
+      <input type="text" id="noteInput" class="modalinputbox" placeholder="Note here">
+      <button id="submitNote">Submit</button>
+    </div>
+  </div>
+
+  <div id="noteRedeem" class="modal" style="display: none">
+    <div class="modal-content">
+      <p><strong>Note to you</strong></p><br>
+      <span class="dotted-line" style="padding-top: 1rem"></br></span>
+      <br>
+      <p id="notedisp"></p>
+    </div>
+  </div>
+
+  <div id="loginmodal" class="modal" style="display: flex">
+		<div class="modal-content">
+			<p class="bold-text"><strong><big><big><b style='font-family: "Playwrite NO", cursive; font-size: 1.8rem'>Log in</b></big></big></strong></p><br>
+			<span class="dotted-line" style="padding-top: 0.5rem"></span>
+			<p class="less-bold-text" style="margin-top: 1rem">Your Mahidol Email</p>
+
+
+			<div style="display:flex; align-items:center; justify-content: center;">
+				<input type="text" id="emailInp" class="modalinputbox" style="margin-top: 0.1rem; text-align: right; width:40%" placeholder="chamom.ile">
+				<span style="padding-bottom: 0.75rem">@student.mahidol.edu</span>
+			</div>
+			<p class="less-bold-text">Your student ID</p>
+			<input type="text" id="studentId" class="modalinputbox" style="margin-top: 0.1rem; text-align: center; width:50%" placeholder="678xxxx">
+			<br>
+			<button id="submitLogin">Login</button>
+		</div>
+	</div>
+
+  
+
+  <div id="giftIdDisp" class="modal" style="display: none">
+    <div class="modal-content" style="max-width: 800px !important;">
+      <p style='font-family: "Playwrite NO", cursive; font-size: 1.8rem'><strong>Success!</strong></p>
+      <span class="dotted-line" style="padding-top: 1rem"></br></span>
+      <p id="giftidtext">Your gift id is : </p>
+      <p><small>Please write this ID on a post-it note,</small></p>
+      <p><small>attach it to your gift,</small></p>
+      <p><small>and let your N'Junior know to collect it!</small></p>
+    </div>
+  </div>
+
+  <div class="content-box">
+    <div class="main-container" id="main-container">
+      <div class="upload-container">
+        <div class="upload-area preview-hidden" id="drop-zone">
+          <div class="upload-icon">
+            <i class="fa-solid fa-cloud-arrow-up"></i>
+          </div>
+          <h2 class="title-font">Upload your Gift</h2>
+          <p>Snap a picture of your gift and upload it here!</span></p>
+          <p class="file-limit">JPG, PNG, or WEBP only (Max 20MB)</p>
+          <input type="file" id="file-input" accept="image/jpeg, image/png, image/webp" hidden>
+        </div>
+        
+        <div id="preview-container" class="preview-hidden">
+          <div class="image-wrapper">
+            <img id="image-preview" src="" alt="Preview">
+          </div>
+          <span class="dotted-line"></br></span>
+          <div class="button-group">
+            <a id="remove-btn" class="details-button" style="margin-bottom: 0.5rem !important;"><i class="fa-solid fa-trash"></i> Remove</a>
+            <a id="upload-btn" class="details-button">Submit Photo</a>
+            <a id="redeem-btn" class="details-button preview-hidden redeemloading">Redeem Gift</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</body>
+<script src="giftexchange.js"></script>
+</html>
