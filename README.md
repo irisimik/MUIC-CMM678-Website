@@ -16,4 +16,4 @@ Event board:
  - Coordinated "Gift Exchange" events. Ensuring that the event runs smoothly using automated table partitioning algorithm and image upload system for gift identification, with email and student ID based authentication.
  - Event board for displaying upcoming events, along with relevant links such as sign-ups, informations, etc.
  - Used Cloudflare zero-trust solution to ensure secure HTTPS connection.
- - Server was ran on low power computing device, using light-weight linux OS (Debian 13.4).
+ - Server was ran on low powered computing device, using light-weight linux OS (Debian 13.4).
